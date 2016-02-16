@@ -8,13 +8,12 @@ documento = Blueprint('documento', __name__)
 
 @documento.route('/testUpload')
 def index():
-    url_for('testUpload', filename='testUpload.html')
-    return documento.send_static_file('testUpload')
+    return render_template('testUpload.html')
+    
 
 @documento.route('/upload', methods=['POST'])
 def upload():
     """Upload a new file."""
-    if request._method == 'POST':
-        print('saving')
-        save(request._files['upload'])
-        return url_for('index')
+    print('saving')
+    save(request._files['upload'])
+    return url_for('index')
