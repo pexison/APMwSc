@@ -11,6 +11,8 @@ manager.add_command("runserver", Server(
     host = '0.0.0.0')
 )
 
+UPLOAD_DEST = 'uploadedFiles/'
+
 @app.before_request
 def make_session_permanent():
     session.permanent = True
