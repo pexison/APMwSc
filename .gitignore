@@ -1,3 +1,4 @@
 path_to_my_venv/*
 *.pyc
 *.swp
+app/scrum/.ropeproject/*

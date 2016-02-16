@@ -46,6 +46,8 @@ from app.scrum.tareas import tareas
 app.register_blueprint(tareas)
 from app.scrum.cates import cates
 app.register_blueprint(cates)
+from app.scrum.documento import documento
+app.register_blueprint(documento)
 
 
 if __name__ == '__main__':
