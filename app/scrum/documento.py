@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import os
-from flask import request, session, Blueprint, json
+from flask import request, session, Blueprint, json, Flask, render_template
 from flask.ext.uploads import  *
 
-documento = Blueprint('history', __name__)
+documento = Blueprint('documento', __name__)
 
 @documento.route('/testUpload')
 def index():
-    return render_template('../../static/testUpload.html')
+    url_for('testUpload', filename='testUpload.html')
+    return documento.send_static_file('testUpload')
 
 @documento.route('/upload', methods=['POST'])
 def upload():
