@@ -1,4 +1,8 @@
 .gitignore
+app/scrum/archivos.py~
+app/scrum/backLog.py~
+app/scrum/model.py~
+app/scrum/data.sqlite
 /env
 path_to_my_venv/*
 *.pyc

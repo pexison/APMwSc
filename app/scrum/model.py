@@ -71,6 +71,10 @@ class clsArchivos(db.Model):
 		self.BL_url 		= url
 		self.BL_dateArch 	= dateArch
 		self.BL_nameBacklog	= nameBacklog
+		
+	def __repr__(self):
+		'''Representacion en string del modelo Archivo'''
+		return '<idArchive %r, name %r, url %r, date %r>' % (self.AR_idArchivos, self.AR_nameArch, self.AR_url, self.AR_dateArch)
 	
 	
 class clsActor(db.Model):

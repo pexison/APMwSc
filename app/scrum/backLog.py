@@ -195,7 +195,18 @@ class backlog(object):
         if checkTypeId: 
             found = clsUserHistory.query.filter_by(UH_idBacklog  = idBacklog).all()
             return found
-        return([])       
+        return([])  
+        
+        
+    def archivesAsociatedToProduct(self,idBacklog):
+        ''' Permite obtener una lista de los Archivos asociados a un Producto'''
+        
+        checkTypeId = type(idBacklog) == int   
+         
+        if checkTypeId: 
+            found = clsArchivos.query.filter_by(AR_nameBacklog = idBacklog).all()
+            return found
+        return([])      
                           
 
     def updateScaleType(self,idUserHistory,new_scale):
