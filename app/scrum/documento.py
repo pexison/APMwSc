@@ -26,6 +26,7 @@ def upload(nombrePila):
     date = datetime.today()
     url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
     newFile = clsArchivos(file.filename, url, date, nombrePila)
+    # TO-DO chequear que no haya ya un archivo con el mismo nombre
     db.session.add(newFile)
     db.session.commit()    
     return 'Archivo subido en: ' + app.config['UPLOADED_FILES_DEST'] + file.filename
