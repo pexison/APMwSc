@@ -58,7 +58,7 @@ scrumModule.controller('VProductoController',
       $scope.msg = '';
       $scope.fPila = {};
 
-      prodService.VProducto({"idPila":$routeParams.idPila}).then(function (object) {
+      prodService.VProducto({"idPila":$routeParams.idPila, "nombrePila": "Taxi Seguro"}).then(function (object) {
         $scope.res = object.data;
         for (var key in object.data) {
             $scope[key] = object.data[key];
@@ -100,7 +100,20 @@ scrumModule.controller('VProductoController',
                   getData: function($defer, params) {
                       $defer.resolve(VObjetivo7Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                   }
-              });            
+              });
+
+              // estos son los files
+              var VFiles9Data = $scope.res.data9;
+              if(typeof VFiles9Data === 'undefined') VFiles9Data=[];
+              $scope.tableParams9 = new ngTableParams({
+                  page: 1,            // show first page
+                  count: 10           // count per page
+              }, {
+                  total: VFiles9Data.length, // length of data
+                  getData: function($defer, params) {
+                      $defer.resolve(VFiles9Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                  }
+              });                           
 
 
       });

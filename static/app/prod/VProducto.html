@@ -73,6 +73,26 @@
         </table>
 
 <hr />
+<hr /><h3>Archivos</h3>
+        <table ng-table="tableParams9" template-pagination="pager.html" class="table">
+            <tr ng-repeat="row in $data">
+                <td data-title="'Descripción'">{{row['url']}}</td>
+                <td><a ng-show="actor=='desarrollador' || actor=='duenoProducto' || actor=='maestroScrum' || false" ng-click="VObjetivo7(row['idFile'])">Ver</a></td>
+            </tr>
+        </table>
+        <div class="container">
+          <div class="header">
+            <h3 class="text-muted">How To Upload a File</h3>
+          </div>
+          <hr/>
+          <div>
+          <form action="upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file"><br /><br />
+            <input type="submit" value="Upload">
+          </form>
+          </div>
+        </div>        
+<hr />
 
 
 <div id="right"></div>

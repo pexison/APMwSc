@@ -173,8 +173,17 @@ class backlog(object):
         if checkTypeId: 
             found = clsAccion.query.filter_by(AC_idBacklog  = idBacklog).all()
             return found
-        return([]) 
-     
+        return([])
+
+    def filesAssociatedToProduct(self, nameBacklog):
+        ''' Permite obtener una lista de los archivos asociados a una pila de Producto'''
+
+        checkTypeId = type(nameBacklog) == str
+
+        if checkTypeId: 
+            found = clsArchivos.query.filter_by(AR_nameBacklog = nameBacklog).all()
+            return found
+        return([])
 
     def objectivesAsociatedToProduct(self,idBacklog):
         ''' Permite obtener una lista de los Objetivos asociados a una pila de Producto'''
