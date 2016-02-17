@@ -28,14 +28,11 @@ def upload(nombrePila):
     date = datetime.utcnow()
     url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
     c = archivos()
-    c.insertArchive(file.filename, url, date, 'Taxi Seguro')
-    # newFile = clsArchivos(file.filename, url, date, nombrePila)
-    # # TO-DO chequear que no haya ya un archivo con el mismo nombre
-    # db.session.add(newFile)
-    # db.session.commit()    
+    c.insertArchive(file.filename, url, date, nombrePila)  
     return 'Archivo subido en: ' + app.config['UPLOADED_FILES_DEST'] + file.filename
 
 @documento.route("/download/<path:filename>")
 def download(filename):
     """Downloads a file."""
-    return send_file(app.config['UPLOADED_FILES_DEST'] + filename, as_attachment=True)
+    print(filename)
+    return send_file(filename, as_attachment=True)

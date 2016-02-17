@@ -61,6 +61,7 @@ scrumModule.controller('VProductoController',
 
       prodService.VProducto({"idPila":$routeParams.idPila, "nombrePila": $routeParams.nombrePila}).then(function (object) {
         $scope.res = object.data;
+        $scope.backlogId = $routeParams.nombrePila;
         for (var key in object.data) {
             $scope[key] = object.data[key];
         }
@@ -160,6 +161,9 @@ scrumModule.controller('VProductoController',
       };
       $scope.VObjetivo7 = function(idObjetivo) {
         $location.path('/VObjetivo/'+((typeof idObjetivo === 'object')?JSON.stringify(idObjetivo):idObjetivo));
+      };
+      $scope.downloadFile = function (url) {
+        $location.path('/download/'+((typeof url === 'object')?JSON.stringify(url):url));
       };
 
     }]);

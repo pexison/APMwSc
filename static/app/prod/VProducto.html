@@ -77,9 +77,9 @@
         <table ng-table="tableParams9" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
                 <td data-title="'Nombre'">
-                    <a href="#">
+                    <span ng-click="downloadFile(row['url'])">
                         {{row['nombre']}}
-                    </a>
+                    </span>
                 </td>
                 <td data-title="'Fecha de carga'">
                     {{row['fecha']}}
@@ -89,8 +89,7 @@
         <div class="container">
           <hr/>
           <div>
-              {# Harcoded route!!! #}
-              <form action="upload/Taxi Seguro" method="post" enctype="multipart/form-data">
+              <form action="{{'/upload/' + backlogId}}" method="post" enctype="multipart/form-data">
                 <input type="file" name="file"><br /><br />
                 <input type="submit" value="Subir">
               </form>
