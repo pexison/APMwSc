@@ -61,16 +61,16 @@ class clsArchivos(db.Model):
 	__tablename__ 	 =  'archivos'
 	AR_idArchivos    = db.Column(db.Integer,primary_key = True, index = True)
 	AR_nameArch      = db.Column(db.String(50),unique = True)	
-	AR_url   	 = db.Column(db.String(200))
+	AR_url   	     = db.Column(db.String(200))
 	AR_dateArch      = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 	AR_nameBacklog   = db.Column(db.String(50), db.ForeignKey('backlog.BL_name'))
 
 	def __init__(self,nameArch,url,dateArch, nameBacklog):
 		'''Constructor del modelo Archivos'''
 		self.AR_nameArch  	= nameArch
-		self.BL_url 		= url
-		self.BL_dateArch 	= dateArch
-		self.BL_nameBacklog	= nameBacklog
+		self.AR_url 		= url
+		self.AR_dateArch 	= dateArch
+		self.AR_nameBacklog	= nameBacklog
 		
 	def __repr__(self):
 		'''Representacion en string del modelo Archivo'''

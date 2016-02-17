@@ -76,14 +76,21 @@
 <hr /><h3>Archivos</h3>
         <table ng-table="tableParams9" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
-                <td data-title="'Descripción'">{{row['url']}}</td>
-                <td><a ng-show="actor=='desarrollador' || actor=='duenoProducto' || actor=='maestroScrum' || false" ng-click="VFiles9Data(row['idFile'])">Ver</a></td>
+                <td data-title="'Nombre'">
+                    <a href="#">
+                        {{row['nombre']}}
+                    </a>
+                </td>
+                <td data-title="'Fecha de carga'">
+                    {{row['fecha']}}
+                </td>
             </tr>
         </table>
         <div class="container">
           <hr/>
           <div>
-              <form action="upload/{{row['proyecto']}}" method="post" enctype="multipart/form-data">
+              {# Harcoded route!!! #}
+              <form action="upload/Taxi Seguro" method="post" enctype="multipart/form-data">
                 <input type="file" name="file"><br /><br />
                 <input type="submit" value="Subir">
               </form>
