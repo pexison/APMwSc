@@ -1,5 +1,5 @@
 *~
-app/scrum/data.sqlite
+*.sqlite
 *.pyc
 *.swp
 app/scrum/.ropeproject/*

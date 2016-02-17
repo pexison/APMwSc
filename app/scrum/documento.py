@@ -3,6 +3,7 @@
 import os
 from flask import request, Blueprint, Flask, render_template, send_file
 from datetime import datetime
+from app.scrum.model import clsArchivos, db
 
 app = Flask(__name__)
 documento = Blueprint('documento', __name__)
@@ -17,15 +18,16 @@ def index():
     return render_template('testUpload.html')
 
 
-@documento.route('/upload', methods=['POST'])
-def upload():
+@documento.route('/upload/<path:nombrePila>', methods=['POST'])
+def upload(nombrePila):
     """Upload a new file."""
     file = request.files['file']
     file.save(os.path.join(app.config['UPLOADED_FILES_DEST'], file.filename))
-    # app.config['UPLOADED_FILES_DEST'] + file.filename -> es el path
-    # usar ese path para guardarlo en la base de datos.
     date = datetime.today()
-    # si sqlAlchemy no agarra datetime.today(), datetime.utcnow() puede que funcione
+    url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
+    newFile = clsArchivos(file.filename, url, date, nombrePila)
+    db.session.add(newFile)
+    db.session.commit()    
     return 'Archivo subido en: ' + app.config['UPLOADED_FILES_DEST'] + file.filename
 
 @documento.route("/download/<path:filename>")

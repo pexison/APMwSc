@@ -65,7 +65,7 @@ class clsArchivos(db.Model):
 	AR_dateArch      = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 	AR_nameBacklog   = db.Column(db.String(50), db.ForeignKey('backlog.BL_name'))
 
-	def __init__(self,name,description,scaleType):
+	def __init__(self,nameArch,url,dateArch, nameBacklog):
 		'''Constructor del modelo Archivos'''
 		self.AR_nameArch  	= nameArch
 		self.BL_url 		= url
