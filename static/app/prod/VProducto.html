@@ -77,7 +77,7 @@
         <table ng-table="tableParams9" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
                 <td data-title="'Descripción'">{{row['url']}}</td>
-                <td><a ng-show="actor=='desarrollador' || actor=='duenoProducto' || actor=='maestroScrum' || false" ng-click="VObjetivo7(row['idFile'])">Ver</a></td>
+                <td><a ng-show="actor=='desarrollador' || actor=='duenoProducto' || actor=='maestroScrum' || false" ng-click="VFiles9Data(row['idFile'])">Ver</a></td>
             </tr>
         </table>
         <div class="container">

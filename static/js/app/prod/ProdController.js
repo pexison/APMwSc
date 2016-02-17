@@ -2,7 +2,7 @@ scrumModule.config(function ($routeProvider) {
     $routeProvider.when('/VProductos', {
                 controller: 'VProductosController',
                 templateUrl: 'app/prod/VProductos.html'
-            }).when('/VProducto/:idPila', {
+            }).when('/VProducto/:idPila/:nombrePila', {
                 controller: 'VProductoController',
                 templateUrl: 'app/prod/VProducto.html'
             }).when('/VCrearProducto', {
@@ -47,8 +47,9 @@ scrumModule.controller('VProductosController',
         $location.path('/VLogin');
       };
 
-      $scope.VProducto0 = function(idPila) {
-        $location.path('/VProducto/'+((typeof idPila === 'object')?JSON.stringify(idPila):idPila));
+      $scope.VProducto0 = function(idPila, nombrePila) {
+        $location.path('/VProducto/'+((typeof idPila === 'object')?JSON.stringify(idPila):idPila)+'/'+
+            ((typeof nombrePila === 'object')?JSON.stringify(nombrePila):nombrePila));
       };
 
     }]);
@@ -58,7 +59,7 @@ scrumModule.controller('VProductoController',
       $scope.msg = '';
       $scope.fPila = {};
 
-      prodService.VProducto({"idPila":$routeParams.idPila, "nombrePila": "Taxi Seguro"}).then(function (object) {
+      prodService.VProducto({"idPila":$routeParams.idPila, "nombrePila": $routeParams.nombrePila}).then(function (object) {
         $scope.res = object.data;
         for (var key in object.data) {
             $scope[key] = object.data[key];
