@@ -1,3 +1,5 @@
+.gitignore
+/env
 path_to_my_venv/*
 *.pyc
 *.swp

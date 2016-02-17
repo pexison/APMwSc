@@ -3,11 +3,13 @@
 # Se importan las librerias necesarias.
 import os
 import sys
+import datetime
 from flask                 import Flask
 from flask.ext.migrate     import Migrate, MigrateCommand
 from flask.ext.sqlalchemy  import SQLAlchemy
 from flask.ext.script      import Manager
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
+from sqlalchemy 	   import DateTime
  
 # Conexion con la base de datos.
 basedir                 = os.path.abspath(os.path.dirname(__file__))
@@ -39,6 +41,7 @@ class clsBacklog(db.Model):
 	BL_refActor     = db.relationship('clsActor',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
 	BL_refAccion    = db.relationship('clsAccion',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")	
 	BL_refUserHist  = db.relationship('clsUserHistory',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
+	BL_refArchivos  = db.relationship('clsArchivos',backref = 'backlog',lazy = 'dynamic',cascade = "all, delete, delete-orphan")
  
 	def __init__(self,name,description,scaleType):
 		'''Constructor del modelo Backlog'''
@@ -51,6 +54,24 @@ class clsBacklog(db.Model):
 		return '<idBacklog %r, name %r, scaleType %r>' % (self.BL_idBacklog, self.BL_name, self.BL_scaleType)
  	
  	
+
+class clsArchivos(db.Model):
+	'''Clase que define los archivos de cada proyecto '''
+	
+	__tablename__ 	 =  'archivos'
+	AR_idArchivos    = db.Column(db.Integer,primary_key = True, index = True)
+	AR_nameArch      = db.Column(db.String(50),unique = True)	
+	AR_url   	 = db.Column(db.String(200))
+	AR_dateArch      = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+	AR_nameBacklog   = db.Column(db.String(50), db.ForeignKey('backlog.BL_name'))
+
+	def __init__(self,name,description,scaleType):
+		'''Constructor del modelo Archivos'''
+		self.AR_nameArch  	= nameArch
+		self.BL_url 		= url
+		self.BL_dateArch 	= dateArch
+		self.BL_nameBacklog	= nameBacklog
+	
 	
 class clsActor(db.Model):
     '''Clase que define el modelo Actor'''
