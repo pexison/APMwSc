@@ -29,10 +29,9 @@ def upload(nombrePila):
     url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
     c = archivos()
     c.insertArchive(file.filename, url, date, nombrePila)  
-    return 'Archivo subido en: ' + app.config['UPLOADED_FILES_DEST'] + file.filename
+    return ('', 204)
 
-@documento.route("/download/<path:filename>")
+@documento.route("/download/<path:filename>", methods=['GET'])
 def download(filename):
     """Downloads a file."""
-    print(filename)
     return send_file(filename, as_attachment=True)

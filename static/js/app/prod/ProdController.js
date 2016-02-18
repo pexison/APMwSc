@@ -54,8 +54,8 @@ scrumModule.controller('VProductosController',
 
     }]);
 scrumModule.controller('VProductoController', 
-   ['$scope', '$location', '$route', 'flash', '$routeParams', 'ngTableParams', 'accionService', 'actorService', 'catesService', 'historiasService', 'identService', 'objetivoService', 'prodService',
-    function ($scope, $location, $route, flash, $routeParams, ngTableParams, accionService, actorService, catesService, historiasService, identService, objetivoService, prodService) {
+   ['$window', '$timeout', '$scope', '$location', '$route', 'flash', '$routeParams', 'ngTableParams', 'accionService', 'actorService', 'catesService', 'historiasService', 'identService', 'objetivoService', 'prodService',
+    function ($window, $timeout, $scope, $location, $route, flash, $routeParams, ngTableParams, accionService, actorService, catesService, historiasService, identService, objetivoService, prodService) {
       $scope.msg = '';
       $scope.fPila = {};
 
@@ -162,8 +162,11 @@ scrumModule.controller('VProductoController',
       $scope.VObjetivo7 = function(idObjetivo) {
         $location.path('/VObjetivo/'+((typeof idObjetivo === 'object')?JSON.stringify(idObjetivo):idObjetivo));
       };
+      $scope.uploadFile = function (url) {
+        $timeout(function () {$route.reload();} , 500);
+      };      
       $scope.downloadFile = function (url) {
-        $location.path('/download/'+((typeof url === 'object')?JSON.stringify(url):url));
+        $window.location = '/download/' + url;
       };
 
     }]);

@@ -77,7 +77,7 @@
         <table ng-table="tableParams9" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
                 <td data-title="'Nombre'">
-                    <span ng-click="downloadFile(row['url'])">
+                    <span class="file-name"ng-click="downloadFile(row['url'])">
                         {{row['nombre']}}
                     </span>
                 </td>
@@ -91,7 +91,7 @@
           <div>
               <form action="{{'/upload/' + backlogId}}" method="post" enctype="multipart/form-data">
                 <input type="file" name="file"><br /><br />
-                <input type="submit" value="Subir">
+                <input type="submit" value="Subir" ng-click="uploadFile()">
               </form>
           </div>
         </div>        

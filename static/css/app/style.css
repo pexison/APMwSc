@@ -34,3 +34,13 @@
   font-family: inherit;
   font-size: 100%;
 }
+
+.file-name {
+    text-decoration: underline;
+    color: blue
+}
+
+.file-name:hover {
+    cursor: pointer;
+    color: rgba(15, 15, 128, 0.95)
+} 
