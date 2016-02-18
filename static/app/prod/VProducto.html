@@ -74,7 +74,7 @@
 
 <hr />
 <hr /><h3>Archivos</h3>
-        <table ng-table="tableParams9" template-pagination="pager.html" class="table">
+        <table ng-table="tableParams9" template-pagination="pager.html" class="table" id="filesTable">
             <tr ng-repeat="row in $data">
                 <td data-title="'Nombre'">
                     <span class="file-name"ng-click="downloadFile(row['url'])">
