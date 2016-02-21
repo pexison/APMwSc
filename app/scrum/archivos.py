@@ -19,9 +19,8 @@ class archivos(object):
 
     
     def findName(self,name):
-
+      
         checkTypeName = type(name) == str
-
         if checkTypeName:
             checkLongName = CONST_MIN_NAME <= len(name) <= CONST_MAX_NAME
             
@@ -62,16 +61,18 @@ class archivos(object):
                 return True
         return False
         
+
     
     def deleteArchive(self, name):
-        
+
         checkTypeName = type(name) == str
 
         if checkTypeName:
+
             foundName = self.findName(name)
 
             if foundName != []:
-                tupla = clsArchivos.query.filter_by(AR_nameArch = name).first()    
+                tupla = clsArchivos.query.filter_by(AR_nameArch = name).first() 
                 db.session.delete(tupla)
                 db.session.commit()
                 return True
