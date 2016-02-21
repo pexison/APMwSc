@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-. 
 
 import sys
+import datetime
 # Ruta que permite utilizar el módulo model.py
 sys.path.append('app/scrum')
 
@@ -184,6 +185,26 @@ class backlog(object):
             found = clsArchivos.query.filter_by(AR_nameBacklog = nameBacklog).all()
             return found
         return([])
+
+
+    def searchFile(self, nameBacklog, nameArchive):
+        ''' Permite revisar si hay un archivo en el mismo backlog con el mismo nombre'''
+
+        checkTypeId = type(nameBacklog) == str
+        checkTypeName = type(nameArchive) == str
+
+        if checkTypeId and checkTypeName:
+
+            if checkTypeId: 
+                found = clsArchivos.query.filter_by(AR_nameBacklog = nameBacklog, AR_nameArch = nameArchive).all()
+
+                if found == []:
+                    return False
+
+                return True        
+
+        return False
+
 
     def objectivesAsociatedToProduct(self,idBacklog):
         ''' Permite obtener una lista de los Objetivos asociados a una pila de Producto'''

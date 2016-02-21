@@ -6,6 +6,7 @@ import datetime
 sys.path.append('app/scrum')
 
 from model import *
+from backLog import *
 
 # Declaracion de constantes.
 CONST_MAX_NAME        = 50
@@ -42,59 +43,61 @@ class archivos(object):
 
 
     def insertArchive(self,name,url,dateAr,idbacklog):
-        print(name,url,dateAr,idbacklog)
+        oBackLog    = backlog()
         checkTypeName = type(name) == str
         checkTypeUrl = type(url) == str
-        #checkTypedate = type(dateAr) == DateTime
+        checkTypedate = type(dateAr) == DateTime
         checkTypeBacklog = type(idbacklog) == str
 
-        if checkTypeName and checkTypeUrl and checkTypeBacklog:
-            found = self.findName(name);
+        
+
+        if  checkTypeName and checkTypeUrl and checkTypeBacklog:
+            
             checkIdBacklog = clsBacklog.query.filter_by(BL_name = idbacklog).all()
 
-            if found == [] and checkIdBacklog != []:
-                #print(name,url,dateAr,idbacklog)
+            
+            x = oBackLog.searchFile(idbacklog,name)
+
+            if x == True:
+                print('Archivo repetido')
+            
+            if x == False and checkIdBacklog != []:
+               
                 newArch = clsArchivos(name,url,dateAr,idbacklog)
                 newArch.url = url
-                print(newArch)
+
                 db.session.add(newArch)
                 db.session.commit()
+
                 return True
+
+
         return False
 
 
 
-    def deleteArchive(self, name):
+    def deleteArchive(self, name, nameBacklog):
 
         checkTypeName = type(name) == str
+        checkTypeBacklog = type(nameBacklog) == str
 
-        if checkTypeName:
+
+        if checkTypeName and checkTypeBacklog:
+
+            checkIdBacklog = clsBacklog.query.filter_by(BL_name = nameBacklog).all()
 
             foundName = self.findName(name)
+            tupla = clsArchivos.query.filter_by(AR_nameArch = name, AR_nameBacklog = nameBacklog).first()
 
-            if foundName != []:
-                tupla = clsArchivos.query.filter_by(AR_nameArch = name).first()
+            if foundName != [] and checkIdBacklog != [] and tupla != None:       
                 db.session.delete(tupla)
                 db.session.commit()
                 return True
+        
         return False
 
 
-    def modifyArchive(self, name, new_name):
 
-        checkTypeName          = type(name) == str
-        checkTypeNewName       = type(new_name) == str
-
-        if checkTypeName  and checkTypeNewName:
-            foundName    = self.findName(name)
-            foundNewName = self.findName(new_name)
-
-            if foundName != [] and (foundNewName == [] or new_name == name):
-                newArchive                = clsArchivos.query.filter_by(AR_nameArch = name).first()
-                newArchive.AR_nameArch    = new_name
-                db.session.commit()
-                return True
-        return False
 
 
 # Fin Clase Archivos
