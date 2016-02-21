@@ -50,7 +50,8 @@ from app.scrum.cates import cates
 app.register_blueprint(cates)
 from app.scrum.documento import documento
 app.register_blueprint(documento)
-
+from app.scrum.anexo import anexo
+app.register_blueprint(anexo)
 
 if __name__ == '__main__':
     app.config.update(
