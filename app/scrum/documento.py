@@ -13,13 +13,6 @@ documento = Blueprint('documento', __name__)
 # Where files are going to be uploaded
 app.config['UPLOADED_FILES_DEST'] = 'uploadedFiles/'
 
-
-@documento.route('/testUpload')
-def index():
-    """Renders from example."""
-    return render_template('testUpload.html')
-
-
 @documento.route('/upload/<path:nombrePila>', methods=['POST'])
 def upload(nombrePila):
     """Upload a new file."""

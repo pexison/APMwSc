@@ -34,7 +34,7 @@
 <hr />    <form name="fAnexoForm" ng-submit="AAnexo2(fAnexoForm.$valid)" novalidate>
             <input id="fAnexo_idProyecto" type="hidden" name="idProyecto" ng-model="fAnexo.idProyecto" />
             <div class="form-group" ng-class="{ 'has-error' :  fAnexoSubmitted && fAnexoForm.nombre.$invalid && fAnexoForm.nombre.$pristine && fAnexoSubmitted}"><label for="fAnexo_nombre">Nombre</label><input id="fAnexo_nombre" type="text" name="nombre" class="form-control" ng-model="fAnexo.nombre" placeholder="Nombre" required/><p ng-show="fAnexoSubmitted && fAnexoForm.nombre.$invalid" class="help-block">Error en campo Nombre.</p></div>
-            <div class="form-group" ng-class="{ 'has-error' :  fAnexoSubmitted && fAnexoForm.contenido.$invalid && fAnexoForm.contenido.$pristine && fAnexoSubmitted}"><label for="fAnexo_contenido">Contenido</label><input type="file" id="fAnexo_contenido" name="contenido" class="form-control" file="fAnexo.contenido" placeholder="Contenido" required/><p ng-show="fAnexoSubmitted && fAnexoForm.contenido.$invalid" class="help-block">Error en campo Contenido.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fAnexoSubmitted && fAnexoForm.contenido.$invalid && fAnexoForm.contenido.$pristine && fAnexoSubmitted}"><label for="fAnexo_contenido">Contenido</label><input type="file" id="fAnexo_contenido" name="contenido" class="form-control" file-model="myFile" placeholder="Contenido" required/><p ng-show="fAnexoSubmitted && fAnexoForm.contenido.$invalid" class="help-block">Error en campo Contenido.</p></div>
         <button type="submit" class="btn btn-perso btn-lg btn-block">
             <span class="glyphicon glyphicon-flash"></span>Anexar
         </button>

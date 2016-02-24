@@ -44,7 +44,7 @@ scrumModule.controller('VAnexoController',
         $scope.fAnexoSubmitted = true;
         if (isValid) {
           
-          anexoService.AAnexo($scope.fAnexo).then(function (object) {
+          anexoService.AAnexo($scope.fAnexo, $scope.myFile).then(function (object) {
               var msg = object.data["msg"];
               if (msg) flash(msg);
               var label = object.data["label"];

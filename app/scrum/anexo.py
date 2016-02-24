@@ -1,7 +1,13 @@
+from archivos import *
+import os
 from flask import request, session, Blueprint, json
+from datetime import datetime
 
+app = Flask(__name__)
 anexo = Blueprint('anexo', __name__)
 
+# Where files are going to be uploaded
+app.config['UPLOADED_FILES_DEST'] = 'uploadedFiles/'
 
 @anexo.route('/anexo/AAnexo', methods=['POST'])
 def AAnexo():
@@ -12,6 +18,22 @@ def AAnexo():
     #Action code goes here, res should be a list with a label and a message
 
     print('Nombre del anexo:'+request.form['nombre'])
+
+    file = request.files['contenido']
+
+    print('Archivo: ' + file.filename)
+
+    #TODO: backlogId/backlogName is missing
+    #print('Pila: ' + request.form['idProyecto'])
+
+    file.save(os.path.join(app.config['UPLOADED_FILES_DEST'], file.filename))
+    date = datetime.utcnow()
+    url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
+    c = archivos()
+
+    #TODO: This is hardcoded!
+    c.insertArchive(file.filename, url, date, 'Taxi Seguro')
+
     res['label'] = res['label'] + '/' + repr(1)
 
     #Action code ends here
