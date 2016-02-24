@@ -64,17 +64,19 @@ class clsArchivos(db.Model):
 	AR_url   	     = db.Column(db.String(200))
 	AR_dateArch      = db.Column(db.DateTime, default = datetime.datetime.now())
 	AR_nameBacklog   = db.Column(db.String(50), db.ForeignKey('backlog.BL_name'))
+	AR_etiqueta	     = db.Column(db.String(100))
 
-	def __init__(self,nameArch,url,dateArch, nameBacklog):
+	def __init__(self,nameArch,url,dateArch, nameBacklog, etiqueta):
 		'''Constructor del modelo Archivos'''
 		self.AR_nameArch  	= nameArch
 		self.AR_url 		= url
 		self.AR_dateArch 	= dateArch
 		self.AR_nameBacklog	= nameBacklog
+		self.AR_etiqueta	= etiqueta
 
 	def __repr__(self):
 		'''Representacion en string del modelo Archivo'''
-		return '<idArchive %r, name %r, url %r, date %r, nameBacklog %r>' % (self.AR_idArchivos, self.AR_nameArch, self.AR_url, self.AR_dateArch, self.AR_nameBacklog)
+		return '<idArchive %r, name %r, url %r, date %r, nameBacklog %r, etiqueta %r >' % (self.AR_idArchivos, self.AR_nameArch, self.AR_url, self.AR_dateArch, self.AR_nameBacklog, self.AR_etiqueta)
 
 
 class clsActor(db.Model):

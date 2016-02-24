@@ -42,16 +42,17 @@ class archivos(object):
         return found
 
 
-    def insertArchive(self,name,url,dateAr,idbacklog):
+    def insertArchive(self,name,url,dateAr,idbacklog, etiqueta):
         oBackLog    = backlog()
         checkTypeName = type(name) == str
         checkTypeUrl = type(url) == str
         checkTypedate = type(dateAr) == DateTime
         checkTypeBacklog = type(idbacklog) == str
+        checkTypeEtiqueta = type(etiqueta) == str
 
         
 
-        if  checkTypeName and checkTypeUrl and checkTypeBacklog:
+        if  checkTypeName and checkTypeUrl and checkTypeBacklog and checkTypeEtiqueta:
             
             checkIdBacklog = clsBacklog.query.filter_by(BL_name = idbacklog).all()
 
@@ -63,9 +64,9 @@ class archivos(object):
             
             if x == False and checkIdBacklog != []:
                
-                newArch = clsArchivos(name,url,dateAr,idbacklog)
+                newArch = clsArchivos(name,url,dateAr,idbacklog, etiqueta)
                 newArch.url = url
-
+                
                 db.session.add(newArch)
                 db.session.commit()
 
@@ -75,27 +76,18 @@ class archivos(object):
         return False
 
 
+    def deleteArchive(self, idArchivos):
 
-    def deleteArchive(self, name, nameBacklog):
+        found = self.findIdArchives(idArchivos)
 
-        checkTypeName = type(name) == str
-        checkTypeBacklog = type(nameBacklog) == str
-
-
-        if checkTypeName and checkTypeBacklog:
-
-            checkIdBacklog = clsBacklog.query.filter_by(BL_name = nameBacklog).all()
-
-            foundName = self.findName(name)
-            tupla = clsArchivos.query.filter_by(AR_nameArch = name, AR_nameBacklog = nameBacklog).first()
-
-            if foundName != [] and checkIdBacklog != [] and tupla != None:       
-                db.session.delete(tupla)
-                db.session.commit()
-                return True
+        if found != []:
+    
+            db.session.delete(found)
+            db.session.commit()
+            return True
         
-        return False
-
+        return False       
+    
 
 
 

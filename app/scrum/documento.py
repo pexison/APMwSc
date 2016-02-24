@@ -20,8 +20,9 @@ def upload(nombrePila):
     file.save(os.path.join(app.config['UPLOADED_FILES_DEST'], file.filename))
     date = datetime.utcnow()
     url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
+    etiqueta = ' '
     c = archivos()
-    c.insertArchive(file.filename, url, date, nombrePila)  
+    c.insertArchive(file.filename, url, date, nombrePila, etiqueta)  
     return ('', 204)
 
 @documento.route("/download/<path:filename>", methods=['GET'])
