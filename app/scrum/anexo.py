@@ -45,7 +45,6 @@ def AAnexo():
     return json.dumps(res)
 
 
-
 @anexo.route('/anexo/AElimAnexo')
 def AElimAnexo():
     #POST/PUT parameters
@@ -65,28 +64,32 @@ def AElimAnexo():
     return json.dumps(res)
 
 
+@anexo.route("/anexo/ADescargar/<path:filename>", methods=['GET'])
+def download(filename):
+    """Downloads a file."""
+    return send_file(filename, as_attachment=True)
+
 
 @anexo.route('/anexo/VAnexo')
 def VAnexo():
     #GET parameter
-    idPila = request.args['idPila']
+    idPila = int(request.args['idPila'])
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-    res['data1'] = [
-      {'idAnexo':1, 'nombre':'Diagrama de clases', 'contenido':'diagrama.pdf'},
-      {'idAnexo':2, 'nombre':'Diagrama de seccuencia', 'contenido':'diagrama2.pdf'}]
+    emptyBacklog = backlog()
+
+    oBacklog = emptyBacklog.findIdProduct(idPila)
+    filesList = emptyBacklog.filesAssociatedToProduct(oBacklog.BL_name)
+
+    res['data1'] = [{'idAnexo':file.AR_idArchivos, 'nombre':file.AR_nameArch, 'contenido':file.AR_url} for file in filesList]
     res['fAnexo'] = {}
-    res['idPila'] = 1
+    res['idPila'] = idPila
 
     #Action code ends here
     return json.dumps(res)
-
-
-
-
 
 #Use case code starts here
 
