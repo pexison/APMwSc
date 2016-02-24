@@ -17,7 +17,7 @@ def AAnexo():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-    print('Nombre del anexo:'+request.form['nombre'])
+    print('Nombre del anexo: '+request.form['nombre'])
 
     file = request.files['contenido']
 
@@ -49,9 +49,19 @@ def AAnexo():
 def AElimAnexo():
     #POST/PUT parameters
     params = request.get_json()
+
     results = [{'label':'/VAnexo', 'msg':['Anexo eliminado']}, {'label':'/VAnexo', 'msg':['Error al eliminar anexo']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
+
+    attachementId = int(request.args['id'])
+
+    oArchivo = archivos()
+    oArchivo = oArchivo.findIdArchives(attachementId)
+
+    os.remove(oArchivo.AR_url)
+
+    #TODO: Eliminar el archivo de la base de datos usando el id.
 
     res['label'] = res['label'] + '/' + repr(1)
 
