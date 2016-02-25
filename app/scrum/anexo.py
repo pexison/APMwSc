@@ -26,12 +26,14 @@ def AAnexo(idPila):
 
     print('Archivo: ' + file.filename)
 
+    intIdPila = int(idPila)
+
     file.save(os.path.join(app.config['UPLOADED_FILES_DEST'], file.filename))
     date = datetime.utcnow()
     url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
     c = archivos()
 
-    c.insertArchive(file.filename, url, date, idPila, etiqueta)
+    c.insertArchive(file.filename, url, date, intIdPila, etiqueta)
 
     res['label'] = res['label'] + '/' + str(idPila)
 
