@@ -48,7 +48,7 @@ class archivos(object):
         checkTypeName = type(name) == str
         checkTypeUrl = type(url) == str
         checkTypedate = type(dateAr) == DateTime
-        checkTypeBacklog = type(idbacklog) == str
+        checkTypeBacklog = type(idbacklog) == int
         checkTypeEtiqueta = type(etiqueta) == str
 
         if checkTypeName and checkTypeUrl and checkTypeBacklog and checkTypeEtiqueta:

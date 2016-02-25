@@ -189,7 +189,7 @@ class backlog(object):
     def searchFile(self, idBacklog, nameArchive):
         ''' Permite revisar si hay un archivo en el mismo backlog con el mismo nombre'''
 
-        checkTypeId = type(idBacklog) == str
+        checkTypeId = type(idBacklog) == int
         checkTypeName = type(nameArchive) == str
 
         if checkTypeId and checkTypeName:
