@@ -67,7 +67,7 @@ scrumModule.controller('VAnexoController',
       };
 
       $scope.downloadFile = function (url) {
-        $window.location = '/download/' + url;
+        $window.location = '/anexo/ADescargar/' + url;
       };
 
     }]);
