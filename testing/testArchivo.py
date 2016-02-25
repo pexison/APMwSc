@@ -114,8 +114,8 @@ class TestArchivo(unittest.TestCase):
 
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')    
-        
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -134,7 +134,7 @@ class TestArchivo(unittest.TestCase):
 
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')    
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -153,7 +153,7 @@ class TestArchivo(unittest.TestCase):
 
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive(50*'A','/foo/bar/baz', datetime.datetime.now(), idBacklog,'ASSASASC')    
+        aArchive.insertArchive(50*'A','/foo/bar/baz', datetime.datetime.now(), idBacklog,'ASSASASC')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -170,7 +170,7 @@ class TestArchivo(unittest.TestCase):
 
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr',200*'B', datetime.datetime.now(), idBacklog, 'ASSASASC')    
+        aArchive.insertArchive('VtXcyr',200*'B', datetime.datetime.now(), idBacklog, 'ASSASASC')
 
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
@@ -188,7 +188,7 @@ class TestArchivo(unittest.TestCase):
 
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 50*'C')    
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 50*'C')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -208,13 +208,13 @@ class TestArchivo(unittest.TestCase):
 
          # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog,'A')    
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog,'A')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
-      
+
     # Prueba 22
     def testDeleteArchiveShortTag100(self):
          # Insertamos los datos necesarios.
@@ -225,7 +225,7 @@ class TestArchivo(unittest.TestCase):
 
          # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog,100*'A')    
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog,100*'A')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -242,7 +242,7 @@ class TestArchivo(unittest.TestCase):
 
          # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('V','/foo/bar/baz', datetime.datetime.now(), idBacklog,'Axsdf')    
+        aArchive.insertArchive('V','/foo/bar/baz', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
         aArchive = aArchive.findName('V')
         aArchive.deleteArchive(aArchive.id)
@@ -259,7 +259,7 @@ class TestArchivo(unittest.TestCase):
 
          # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive(50*'V','/foo/bar/baz', datetime.datetime.now(), idBacklog,'Axsdf')    
+        aArchive.insertArchive(50*'V','/foo/bar/baz', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
         aArchive = aArchive.findName('V')
         aArchive.deleteArchive(aArchive.id)
@@ -276,7 +276,7 @@ class TestArchivo(unittest.TestCase):
 
          # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','f', datetime.datetime.now(), idBacklog,'Axsdf')    
+        aArchive.insertArchive('VtXcyr','f', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -293,7 +293,7 @@ class TestArchivo(unittest.TestCase):
 
          # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr',200*'f', datetime.datetime.now(), idBacklog,'Axsdf')    
+        aArchive.insertArchive('VtXcyr',200*'f', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -301,7 +301,10 @@ class TestArchivo(unittest.TestCase):
         self.assertTrue(result)
 
     # Casos maliciosos
-    
+
     # Entrada vacia
 
     # Backlog invalido
+
+if __name__ == '__main__':
+    unittest.main()
