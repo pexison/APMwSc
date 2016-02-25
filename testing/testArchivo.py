@@ -2,6 +2,7 @@
 
 import sys
 import unittest
+import datetime
 
 # Ruta que permite utilizar el módulo anexo.py
 sys.path.append('../app/scrum')
@@ -25,7 +26,7 @@ class TestArchivo(unittest.TestCase):
         idBacklog = findId[0].BL_idBacklog
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz','Bxtyllz','ASSASAS')
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
         # Eliminamos los datos insertados.
         aArchive = aArchive.findName('VtXcyr')
         aArchive.deleteArchive(aArchive.id)
@@ -34,6 +35,20 @@ class TestArchivo(unittest.TestCase):
     # Casos Normales
     #Verificar que el archivo se pueda cargar con el nombre correspondiente
     # Prueba 2
+    def testInsertArchivoElement(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
 
     # Casos fronteras
     #Archivo posee Mayuscula
