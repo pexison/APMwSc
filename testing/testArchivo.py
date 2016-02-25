@@ -37,7 +37,6 @@ class TestArchivo(unittest.TestCase):
         aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
 
-
     # Casos Normales
     #Verificar que el archivo se pueda cargar con el nombre correspondiente
     # Prueba 2
@@ -59,26 +58,148 @@ class TestArchivo(unittest.TestCase):
     # Casos fronteras
     #Archivo posee Mayuscula
     # Prueba 3
+    def testInsertArchivoElementMay(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
     #Archivo posee minusculas
     # Prueba 4
+    def testInsertArchivoElementMin(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
+
     #Archivo posee digitos
     # Prueba 5
+    def testInsertArchivoElementDigits(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive('1234','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName('1234')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
+
     #Archivo posee combinacion de todas las anteriores
     # Prueba 6
-    #Archivo nombre muy largo
+    def testInsertArchivoElementCombinational(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive('VtXcyr123','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName('VtXcyr123')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
+
+    #Archivo de 20 caracteres de largo
     # Prueba 7
+    def testInsertArchivoElement20Long(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive(20*'V','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName(20*'V')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
 
     # Casos esquina
     #Sin Backlog
     # Prueba 8
-    #Descripcion de 140 o mas sin Backlog
+    def testInsertArchivoElementSinBacklog(self):
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), [], 'ASSASAS')
+        self.assertFalse(result)
+        # Eliminamos los datos insertados.
+
+    #nombre de 50 o mas sin Backlog
     # Prueba 9
+    def testInsertArchivoElement50Chars(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive(50*'V','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName(50*'V')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
 
     # Casos maliciosos
     #Simbolos que representan PATH en nuestro SO
     # Prueba 10
+    def testInsertArchivoElementPathSym(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        result = aArchive.insertArchive('../','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        self.assertTrue(result)
+        # Eliminamos los datos insertados.
+        aArchive1 = aArchive.findName('../')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+        aBacklog.deleteProduct('Bxtyllz')
     #Archivo nombre vacio
     # Prueba 11
+#    def testInsertArchivoEmptyName(self):
+#        # Insertamos los datos necesarios.
+#        aBacklog  = backlog()
+#        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+#        findId    = aBacklog.findName('Bxtyllz')
+#        idBacklog = findId[0].BL_idBacklog
+#        # Inicio de la prueba.
+#        aArchive      = archivos()
+#        result = aArchive.insertArchive('','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+#        self.assertFalse(result)
+#        # Eliminamos los datos insertados.
+#        aArchive1 = aArchive.findName('')
+#        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+#        aBacklog.deleteProduct('Bxtyllz')
 
     #############################################
     #         Pruebas para searchArchivo        #
@@ -302,11 +423,6 @@ class TestArchivo(unittest.TestCase):
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
-    # Casos maliciosos
-
-    # Entrada vacia
-
-    # Backlog invalido
 
 if __name__ == '__main__':
     unittest.main()
