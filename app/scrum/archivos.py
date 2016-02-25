@@ -2,7 +2,8 @@
 
 import sys
 import datetime
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime 
+
 # Ruta que permite utilizar el módulo model.py
 sys.path.append('app/scrum')
 

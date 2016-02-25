@@ -64,7 +64,7 @@ class clsArchivos(db.Model):
     __tablename__ = 'archivos'
     AR_idArchivos = db.Column(db.Integer, primary_key=True, index=True)
     AR_nameArch = db.Column(db.String(50), unique=False)
-    AR_url = db.Column(db.String(200))
+    AR_url = db.Column(db.String(200), nullable=False)
     AR_dateArch = db.Column(db.DateTime, default=datetime.datetime.now())
     AR_idBacklog = db.Column(db.String(50), db.ForeignKey('backlog.BL_idBacklog'))
     AR_etiqueta = db.Column(db.String(100))
