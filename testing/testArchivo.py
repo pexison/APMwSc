@@ -7,8 +7,11 @@ import datetime
 # Ruta que permite utilizar el módulo anexo.py
 sys.path.append('../app/scrum')
 
-from archivos import *
+from model import *
 from backLog import *
+from archivos import *
+
+
 
 class TestArchivo(unittest.TestCase):
 
@@ -298,7 +301,7 @@ class TestArchivo(unittest.TestCase):
         self.assertTrue(result)
 
     # Casos maliciosos
+    
     # Entrada vacia
-    # Prueba 27
 
     # Backlog invalido
