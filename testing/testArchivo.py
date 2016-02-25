@@ -6,17 +6,30 @@ import unittest
 # Ruta que permite utilizar el módulo anexo.py
 sys.path.append('../app/scrum')
 
-from anexo import *
+from archivos import *
 
-class TestAnexo(unittest.TestCase):
+class TestArchivo(unittest.TestCase):
 
     #############################################
-    #         Pruebas para insertAnexo          #
+    #         Pruebas para insertArchivo        #
     #############################################
 
     # Caso inicial
     #Verificar que el archivo se pueda cargar con el nombre correspondiente
     # Prueba 1
+    def testInsertArchivoExist(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz','Bxtyllz','ASSASAS')
+        # Eliminamos los datos insertados.
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
 
     # Casos Normales
     #Verificar que el archivo se pueda cargar con el nombre correspondiente
@@ -47,7 +60,7 @@ class TestAnexo(unittest.TestCase):
     # Prueba 11
 
     #############################################
-    #         Pruebas para searchAnexo          #
+    #         Pruebas para searchArchivo        #
     #############################################
 
     # Caso inicial
@@ -68,7 +81,7 @@ class TestAnexo(unittest.TestCase):
 
 
     #############################################
-    #         Pruebas para deleteAnexo          #
+    #         Pruebas para deleteArchivo        #
     #############################################
 
     # Caso inicial
