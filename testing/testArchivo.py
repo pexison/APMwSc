@@ -101,21 +101,103 @@ class TestArchivo(unittest.TestCase):
 
     # Caso inicial
     # Prueba 16
+    def testDeleteArchivo(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')    
+        
+        #probamos borrar
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
 
     # Casos Normales
     # El archivo existe y se borra exitosamente
     # Prueba 17
+    def testDeleteArchivoNormal(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')    
+        self.assertTrue(result)
+        #probamos borrar
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
+
 
     # Casos Esquinas
     # Backlog invalido
     # Prueba 18
 
+    def testDeleteArchivoEsquina(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive(50*'A','/foo/bar/baz', datetime.datetime.now(), idBacklog,'ASSASASC')    
+        self.assertTrue(result)
+        #probamos borrar
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
+
+    # Prueba 19
+    def testDeleteArchivoEsquina(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive('VtXcyr',200*'B', datetime.datetime.now(), idBacklog, 'ASSASASC')    
+        self.assertTrue(result)
+        #probamos borrar
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
+
+    # Prueba 20
+    def testDeleteArchivoEsquina(self):
+        # Insertamos los datos necesarios.
+        aBacklog  = backlog()
+        aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+        findId    = aBacklog.findName('Bxtyllz')
+        idBacklog = findId[0].BL_idBacklog
+
+        # Inicio de la prueba.
+        aArchive      = archivos()
+        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 50*'C')    
+        self.assertTrue(result)
+        #probamos borrar
+        aArchive = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive.id)
+        aBacklog.deleteProduct('Bxtyllz')
+
+
     # Casos fronteras
     # Longuitud de archivo (grande y pequeña)
-    # Prueba 19
-    # Prueba 20
+    # Prueba 21
+    # Prueba 22
 
     # Casos maliciosos
     # Entrada vacia
-    # Prueba 21
+    # Prueba 23
 
