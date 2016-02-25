@@ -17,7 +17,9 @@ def AAnexo():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-    print('Nombre del anexo: '+request.form['nombre'])
+    etiqueta = request.form['nombre']
+
+    print('Nombre del anexo: '+ etiqueta)
 
     file = request.files['contenido']
 
@@ -32,7 +34,7 @@ def AAnexo():
     c = archivos()
 
     #TODO: This is hardcoded!
-    c.insertArchive(file.filename, url, date, 'Taxi Seguro')
+    c.insertArchive(file.filename, url, date, 'Taxi Seguro', etiqueta)
 
     res['label'] = res['label'] + '/' + repr(1)
 
@@ -56,12 +58,13 @@ def AElimAnexo():
 
     attachementId = int(request.args['id'])
 
-    oArchivo = archivos()
-    oArchivo = oArchivo.findIdArchives(attachementId)
+    oArchivo = archivos().findIdArchives(attachementId)
 
+    #Delete physical file
     os.remove(oArchivo.AR_url)
 
-    #TODO: Eliminar el archivo de la base de datos usando el id.
+    #Delete file information in the database
+    archivos().deleteArchive(attachementId)
 
     res['label'] = res['label'] + '/' + repr(1)
 
@@ -94,7 +97,7 @@ def VAnexo():
     oBacklog = emptyBacklog.findIdProduct(idPila)
     filesList = emptyBacklog.filesAssociatedToProduct(oBacklog.BL_name)
 
-    res['data1'] = [{'idAnexo':file.AR_idArchivos, 'nombre':file.AR_nameArch, 'contenido':file.AR_url} for file in filesList]
+    res['data1'] = [{'idAnexo':file.AR_idArchivos, 'nombre':file.AR_etiqueta, 'contenido':file.AR_url} for file in filesList]
     res['fAnexo'] = {}
     res['idPila'] = idPila
 
