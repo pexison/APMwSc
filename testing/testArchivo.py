@@ -33,9 +33,10 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
         # Eliminamos los datos insertados.
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
+
 
     # Casos Normales
     #Verificar que el archivo se pueda cargar con el nombre correspondiente
@@ -48,11 +49,11 @@ class TestArchivo(unittest.TestCase):
         idBacklog = findId[0].BL_idBacklog
         # Inicio de la prueba.
         aArchive      = archivos()
-        aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+        result = aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
         self.assertTrue(result)
         # Eliminamos los datos insertados.
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
 
     # Casos fronteras
@@ -118,8 +119,8 @@ class TestArchivo(unittest.TestCase):
         aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
 
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -137,8 +138,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -156,8 +157,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive(50*'A','/foo/bar/baz', datetime.datetime.now(), idBacklog,'ASSASASC')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -174,8 +175,8 @@ class TestArchivo(unittest.TestCase):
         aArchive.insertArchive('VtXcyr',200*'B', datetime.datetime.now(), idBacklog, 'ASSASASC')
 
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -191,8 +192,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 50*'C')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -211,8 +212,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog,'A')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -228,8 +229,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog,100*'A')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -245,8 +246,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('V','/foo/bar/baz', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
-        aArchive = aArchive.findName('V')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('V')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -262,8 +263,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive(50*'V','/foo/bar/baz', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
-        aArchive = aArchive.findName('V')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName(50*'V')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -279,8 +280,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr','f', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -296,8 +297,8 @@ class TestArchivo(unittest.TestCase):
         aArchive      = archivos()
         aArchive.insertArchive('VtXcyr',200*'f', datetime.datetime.now(), idBacklog,'Axsdf')
         #probamos borrar
-        aArchive = aArchive.findName('VtXcyr')
-        aArchive.deleteArchive(aArchive.id)
+        aArchive1 = aArchive.findName('VtXcyr')
+        result = aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
@@ -309,3 +310,4 @@ class TestArchivo(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
