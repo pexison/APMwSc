@@ -91,12 +91,42 @@ class TestArchivo(unittest.TestCase):
     # Casos normales
     #Si el archivo existe
     # Prueba 12
+    def testFindIsArchiveExist(self):
+       # Insertamos los datos necesarios.
+       aBacklog  = backlog()
+       aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+       findId    = aBacklog.findName('Bxtyllz')
+       idBacklog = findId[0].BL_idBacklog
+       # Inicio de la prueba.
+       aArchive      = archivos()
+       aArchive.insertArchive('VtXcyr','/foo/bar/baz', datetime.datetime.now(), idBacklog, 'ASSASAS')
+       aArchive1 = aArchive.findName('VtXcyr')
+       result = aArchive.findIdArchives(aArchive1[0].AR_idArchivos)
+       self.assertTrue(result)
+       # Eliminamos los datos insertados.
+       aArchive.deleteArchive(aArchive1[0].AR_idArchivos)
+       aBacklog.deleteProduct('Bxtyllz')
+
     #Si el archivo no existe
     # Prueba 13
+    def testFindIsArchiveNotExist(self):
+       # Insertamos los datos necesarios.
+       aBacklog  = backlog()
+       aBacklog.insertBacklog('Bxtyllz','Mxtyrzx',1)
+       findId    = aBacklog.findName('Bxtyllz')
+       idBacklog = findId[0].BL_idBacklog
+       # Inicio de la prueba.
+       aArchive      = archivos()
+       result = aArchive.findIdArchives(1)
+       self.assertFalse(result)
+       # Eliminamos los datos insertados.
+       aBacklog.deleteProduct('Bxtyllz')
 
     # Casos maliciosos
     #El Id del archivo es invalido
     # Prueba 14
+
+
     #Valor del Id negativo
     # Prueba 15
 
@@ -302,11 +332,6 @@ class TestArchivo(unittest.TestCase):
         aBacklog.deleteProduct('Bxtyllz')
         self.assertTrue(result)
 
-    # Casos maliciosos
-
-    # Entrada vacia
-
-    # Backlog invalido
 
 if __name__ == '__main__':
     unittest.main()
