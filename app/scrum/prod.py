@@ -99,8 +99,7 @@ def VProducto():
     res = {}
     # Obtenemos el id del producto
     idPila = int(request.args.get('idPila', 1))
-    nombrePila = str(request.args.get('nombrePila', 1))
-    
+    print(idPila)
     if "actor" in session:
         res['actor']=session['actor']
 
@@ -114,13 +113,11 @@ def VProducto():
     actorsList = oBacklog.actorsAsociatedToProduct(idPila)
     accionList = oBacklog.accionsAsociatedToProduct(idPila)
     objectList = oBacklog.objectivesAsociatedToProduct(idPila)
-    filesList = oBacklog.filesAssociatedToProduct(nombrePila)
     
     # Mostramos los datos en la vista.
     res['data3'] = [{'idActor':act.A_idActor,'descripcion':act.A_nameActor + ' : ' + act.A_actorDescription}for act in actorsList]
     res['data5'] = [{'idAccion':acc.AC_idAccion , 'descripcion':acc.AC_accionDescription}for acc in accionList]
     res['data7'] = [{'idObjetivo':obj.O_idObjective, 'descripcion':obj.O_descObjective } for obj in objectList]
-    res['data9'] = [{'idFile':file.AR_idArchivos, 'nombre':file.AR_nameArch, 'url':file.AR_url, 'fecha':file.AR_dateArch, 'proyecto': file.AR_nameBacklog} for file in filesList]
       
     # Buscamos el producto actual
     result = oBacklog.findIdProduct(idPila)

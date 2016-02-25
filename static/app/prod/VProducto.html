@@ -83,30 +83,4 @@
 
 <hr />
 
-<hr /><h3>Archivos</h3>
-        <table ng-table="tableParams9" template-pagination="pager.html" class="table" id="filesTable">
-            <tr ng-repeat="row in $data">
-                <td data-title="'Nombre'">
-                    <span class="file-name"ng-click="downloadFile(row['url'])">
-                        {{row['nombre']}}
-                    </span>
-                </td>
-                <td data-title="'Fecha de carga'">
-                    {{row['fecha']}}
-                </td>
-            </tr>
-        </table>
-        <div class="container">
-          <hr/>
-          <div>
-              <form action="{{'/upload/' + backlogId}}" method="post" enctype="multipart/form-data">
-                <input type="file" name="file"><br /><br />
-                <input type="submit" value="Subir" ng-click="uploadFile()">
-              </form>
-          </div>
-        </div>        
-<hr />
-
-
-
 <div id="right"></div>

@@ -24,10 +24,15 @@
     </div>
 </nav>
 
-<h3>Anexos</h3>        <table ng-table="tableParams1" template-pagination="pager.html" class="table">
+<h3>Anexos</h3>        
+        <table ng-table="tableParams1" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
-                <td data-title="'Nombre'" ng-bind="row['nombre']"></td>
-                <td ng-show="row['idAnexo']"><a ng-click="AElimAnexo1(row['idAnexo'])">-anexo</a></td>
+                <td data-title="'Nombre'">
+                    <span class="file-name" ng-click="downloadFile(row['url'])">
+                        {{row['nombre']}}
+                    </span>                    
+                </td>
+                <td ng-show="row['idAnexo']"><a ng-click="AElimAnexo1(row['idAnexo'], row['idBacklog'])">-anexo</a></td>
             </tr>
         </table>
 

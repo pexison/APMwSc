@@ -1,8 +1,8 @@
 scrumModule.service('anexoService', ['$q', '$http', function($q, $http) {
 
-    this.AAnexo = function(fAnexo, myFile) {
+    this.AAnexo = function(fAnexo, myFile, idPila) {
         return  $http({
-          url: "anexo/AAnexo",
+          url: "anexo/AAnexo/"+idPila,
           data: fAnexo,
           method: 'POST',
           headers: { 'Content-Type': 'multipart/form-data' },

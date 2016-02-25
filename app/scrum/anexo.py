@@ -9,36 +9,33 @@ anexo = Blueprint('anexo', __name__)
 # Where files are going to be uploaded
 app.config['UPLOADED_FILES_DEST'] = 'uploadedFiles/'
 
-@anexo.route('/anexo/AAnexo', methods=['POST'])
-def AAnexo():
-    #Access to POST/PUT fields using request.form['name']
-    #Access to file fields using request.files['name']
-    results = [{'label':'/VAnexo', 'msg':['Documento anexado']}, {'label':'/VAnexo', 'msg':['Error al guardar anexo']}, ]
+
+@anexo.route('/anexo/AAnexo/<path:idPila>', methods=['POST'])
+def AAnexo(idPila):
+    # Access to POST/PUT fields using request.form['name']
+    # Access to file fields using request.files['name']
+    results = [{'label': '/VAnexo', 'msg': ['Documento anexado']},
+               {'label': '/VAnexo', 'msg': ['Error al guardar anexo']}, ]
     res = results[0]
-    #Action code goes here, res should be a list with a label and a message
+    # Action code goes here, res should be a list with a label and a message
 
     etiqueta = request.form['nombre']
-
-    print('Nombre del anexo: '+ etiqueta)
+    print('Nombre del anexo: ' + etiqueta)
 
     file = request.files['contenido']
 
     print('Archivo: ' + file.filename)
-
-    #TODO: backlogId/backlogName is missing
-    #print('Pila: ' + request.form['idProyecto'])
 
     file.save(os.path.join(app.config['UPLOADED_FILES_DEST'], file.filename))
     date = datetime.utcnow()
     url = str(app.config['UPLOADED_FILES_DEST'] + file.filename)
     c = archivos()
 
-    #TODO: This is hardcoded!
-    c.insertArchive(file.filename, url, date, 'Taxi Seguro', etiqueta)
+    c.insertArchive(file.filename, url, date, idPila, etiqueta)
 
-    res['label'] = res['label'] + '/' + repr(1)
+    res['label'] = res['label'] + '/' + str(idPila)
 
-    #Action code ends here
+    # Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -47,28 +44,27 @@ def AAnexo():
     return json.dumps(res)
 
 
-@anexo.route('/anexo/AElimAnexo')
+@anexo.route('/anexo/AElimAnexo/')
 def AElimAnexo():
-    #POST/PUT parameters
+    # POST/PUT parameters
     params = request.get_json()
 
-    results = [{'label':'/VAnexo', 'msg':['Anexo eliminado']}, {'label':'/VAnexo', 'msg':['Error al eliminar anexo']}, ]
+    results = [{'label': '/VAnexo', 'msg': ['Anexo eliminado']},
+               {'label': '/VAnexo', 'msg': ['Error al eliminar anexo']}, ]
     res = results[0]
-    #Action code goes here, res should be a list with a label and a message
+    # Action code goes here, res should be a list with a label and a message
 
     attachementId = int(request.args['id'])
 
     oArchivo = archivos().findIdArchives(attachementId)
 
-    #Delete physical file
+    # Delete physical file
     os.remove(oArchivo.AR_url)
 
-    #Delete file information in the database
+    # Delete file information in the database
     archivos().deleteArchive(attachementId)
 
-    res['label'] = res['label'] + '/' + repr(1)
-
-    #Action code ends here
+    # Action code ends here
     if "actor" in res:
         if res['actor'] is None:
             session.pop("actor", None)
@@ -83,29 +79,35 @@ def download(filename):
     return send_file(filename, as_attachment=True)
 
 
-@anexo.route('/anexo/VAnexo')
+@anexo.route('/anexo/VAnexo/')
 def VAnexo():
-    #GET parameter
+    # GET parameter
     idPila = int(request.args['idPila'])
     res = {}
     if "actor" in session:
-        res['actor']=session['actor']
-    #Action code goes here, res should be a JSON structure
+        res['actor'] = session['actor']
+    # Action code goes here, res should be a JSON structure
 
     emptyBacklog = backlog()
 
-    oBacklog = emptyBacklog.findIdProduct(idPila)
-    filesList = emptyBacklog.filesAssociatedToProduct(oBacklog.BL_name)
+    # oBacklog = emptyBacklog.findIdProduct(idPila)
+    filesList = emptyBacklog.filesAssociatedToProduct(idPila)
 
-    res['data1'] = [{'idAnexo':file.AR_idArchivos, 'nombre':file.AR_etiqueta, 'contenido':file.AR_url} for file in filesList]
+    res['data1'] = [
+        {'idAnexo': file.AR_idArchivos,
+         'nombre': file.AR_etiqueta,
+         'url': file.AR_url,
+         'fecha': file.AR_dateArch,
+         'etiqueta': file.AR_etiqueta,
+         'idBacklog': file.AR_idBacklog
+         } for file in filesList]
     res['fAnexo'] = {}
     res['idPila'] = idPila
 
-    #Action code ends here
+    # Action code ends here
     return json.dumps(res)
 
-#Use case code starts here
+# Use case code starts here
 
 
-#Use case code ends here
-
+# Use case code ends here

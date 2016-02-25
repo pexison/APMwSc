@@ -2,7 +2,7 @@ scrumModule.config(function ($routeProvider) {
     $routeProvider.when('/VProductos', {
                 controller: 'VProductosController',
                 templateUrl: 'app/prod/VProductos.html'
-            }).when('/VProducto/:idPila/:nombrePila', {
+            }).when('/VProducto/:idPila', {
                 controller: 'VProductoController',
                 templateUrl: 'app/prod/VProducto.html'
             }).when('/VCrearProducto', {
@@ -47,9 +47,8 @@ scrumModule.controller('VProductosController',
         $location.path('/VLogin');
       };
 
-      $scope.VProducto0 = function(idPila, nombrePila) {
-        $location.path('/VProducto/'+((typeof idPila === 'object')?JSON.stringify(idPila):idPila)+'/'+
-            ((typeof nombrePila === 'object')?JSON.stringify(nombrePila):nombrePila));
+      $scope.VProducto0 = function(idPila) {
+        $location.path('/VProducto/'+((typeof idPila === 'object')?JSON.stringify(idPila):idPila));
       };
 
     }]);
@@ -59,7 +58,7 @@ scrumModule.controller('VProductoController',
       $scope.msg = '';
       $scope.fPila = {};
 
-      prodService.VProducto({"idPila":$routeParams.idPila, "nombrePila": $routeParams.nombrePila}).then(function (object) {
+      prodService.VProducto({"idPila":$routeParams.idPila}).then(function (object) {
         $scope.res = object.data;
         $scope.backlogId = $routeParams.nombrePila;
         for (var key in object.data) {
@@ -164,12 +163,6 @@ scrumModule.controller('VProductoController',
       };
       $scope.VObjetivo7 = function(idObjetivo) {
         $location.path('/VObjetivo/'+((typeof idObjetivo === 'object')?JSON.stringify(idObjetivo):idObjetivo));
-      };
-      $scope.uploadFile = function (url) {
-        $timeout(function () {$route.reload();} , 500);
-      };      
-      $scope.downloadFile = function (url) {
-        $window.location = '/download/' + url;
       };
 
     }]);
